@@ -32,7 +32,23 @@ def _binary_search(mylist, key, left, right):
 	Returns:
 	  index of key in mylist, or -1 if not present.
 	"""
-	### TODO
+	### DONE
+
+	# Base case: right is less than the left, return -1
+	if right < left:
+		return -1
+
+	# Get the middle index its value
+	middle = (right + left) // 2
+	middle_value = mylist[middle]
+
+	# Check if key is less than, greater than, or equal to middle value and act accordingly
+	if key < middle_value:
+		return _binary_search(mylist, key, left, middle-1)
+	elif key > middle_value:
+		return _binary_search(mylist, key, middle+1, right)
+	else:
+		return middle
 
 	###
 
@@ -57,8 +73,12 @@ def time_search(search_fn, mylist, key):
 	  the number of milliseconds it takes to run this
 	  search function on this input.
 	"""
-	### TODO
+	### DONE
+	start_time = time.time()
+	search_fn(mylist,key)
+	end_time = time.time()
 
+	return (end_time - start_time) * 1000
 	###
 
 def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
@@ -77,7 +97,17 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  for each method to run on each value of n
 	"""
 	### TODO
+	# Create output list
+	list_of_tuples = []
 
+	# iterate through each tuple
+	for size in sizes:
+		input_list = list(range(int(size)))
+		linear_search_time = time_search(linear_search, input_list, -1)
+		binary_search_time = time_search(binary_search, input_list, -1)
+		new_tuple = (size, linear_search_time, binary_search_time)
+		list_of_tuples.append(new_tuple)
+	return list_of_tuples
 	###
 
 def print_results(results):
@@ -87,3 +117,5 @@ def print_results(results):
 							floatfmt=".3f",
 							tablefmt="github"))
 
+# Calling print results of compare search function:
+print_results(compare_search())
