@@ -96,7 +96,7 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	  indicating the number of milliseconds it takes
 	  for each method to run on each value of n
 	"""
-	### TODO
+	### DONE
 	# Create output list
 	list_of_tuples = []
 
